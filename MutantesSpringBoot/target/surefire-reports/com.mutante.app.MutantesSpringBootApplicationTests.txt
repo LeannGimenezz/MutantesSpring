@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.mutante.app.MutantesSpringBootApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.799 s -- in com.mutante.app.MutantesSpringBootApplicationTests
