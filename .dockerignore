@@ -1,6 +1,6 @@
-target/
+MutantesSpringBoot/target/
 *.mvn/
 *.git/
 *.idea/
-MutantesSpringBoot/Dockerfile
+../Dockerfile
 README.md

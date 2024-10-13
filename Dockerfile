@@ -5,8 +5,8 @@ FROM maven:3.8.5 AS build
 WORKDIR /app
 
 # Copiar el archivo pom.xml y las dependencias
-COPY pom.xml .
-COPY src ./src
+COPY MutantesSpringBoot/pom.xml .
+COPY MutantesSpringBoot/src ./src
 
 # Compilar el proyecto y empaquetarlo
 RUN mvn clean package -DskipTests
