@@ -6,6 +6,7 @@ import com.mutante.app.repositorios.DnaRepository;
 import com.mutante.app.repositorios.StatsRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +19,17 @@ public class DnaServiceImpl implements DnaService {
     private final DnaRepository dnaRepository;
     private final StatsRepository statsRepository;
 
+
     public boolean testDna(String[] dna) {
+
+        // Realizar las pruebas para verificar si es mutante
         boolean isMutant = testRows(dna) || testColumn(dna) || testAllDiagonals(dna) || testInverseDiagonals(dna);
+
+        // Guardar el nuevo ADN en la base de datos
         Dna newDna = new Dna(dna, isMutant);
         dnaRepository.save(newDna);
-        return isMutant;
 
+        return isMutant;
     }
 
     public static boolean validRow(String fila) {
@@ -124,8 +130,8 @@ public class DnaServiceImpl implements DnaService {
         Stats stats = new Stats();
 
         List<Dna> dnaList = dnaRepository.findAll();
-        int human = 0;
-        int mutant = 0;
+        Long human = 0L;
+        Long mutant = 0L;
 
         // Calcular el número de humanos y mutantes
         for (Dna dna : dnaList) {
@@ -149,6 +155,15 @@ public class DnaServiceImpl implements DnaService {
 
         // Devolver las estadísticas calculadas
         return stats;
+    }
+
+    public boolean existDna(String[] dna){
+        String dnaString = String.join(",", dna);
+        Optional<Dna> existDna = dnaRepository.findByDna(dnaString);
+        if(existDna.isPresent()){
+            return true;
+        }
+        return false;
     }
 
 }

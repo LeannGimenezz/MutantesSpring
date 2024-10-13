@@ -16,6 +16,9 @@ public class DnaController {
 
     @PostMapping("/test")
     public ResponseEntity<?> testDna(@RequestBody DnaRequest dnaRequest){
+        if (dnaService.existDna(dnaRequest.getDna())){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("El DNA ingresado, ya existe en la base de datos, porfavor ingrese un nuevo DNA.");
+        }
         if(dnaService.validDna(dnaRequest.getDna())){
             boolean res = dnaService.testDna(dnaRequest.getDna());
             if (res){

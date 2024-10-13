@@ -16,9 +16,9 @@ public class Stats {
     @Id
     private Long id;
 
-    private Integer mutants;
+    private Long mutants;
 
-    private Integer humans;
+    private Long humans;
 
     private Double ratio;
 
